@@ -6,12 +6,44 @@
     <title>Vanilla App Template</title>
     
     <script type="module" crossorigin src="/search-event-project/commonHelpers.js"></script>
-    <link rel="stylesheet" href="/search-event-project/assets/index-cb7d5f87.css">
+    <link rel="stylesheet" href="/search-event-project/assets/index-9b9ec563.css">
   </head>
   <body>
 
     <!-- Loads the specified .html file -->
-    <h1 class="title">It is our project!</h1>
+    <header class="header">
+    <div class="container">
+<a href="../index.html" class="header__logo">
+ <svg class="header__icon"><use href="../img/symbol-defs.svg#icon-logo"></use></svg>
+</a>
+
+<h1 class="header__title">
+    FIND BEST EVENTS
+AROUND THE WORLD
+</h1>
+<form class="header__form">
+    <input 
+            type="search" 
+            id="searchQuery" 
+            name="q" 
+            placeholder="Start searching" 
+            aria-label="Почати пошук подій"
+            class="header__inp"
+            required
+        >
+        
+        <input 
+            type="text" 
+            id="country" 
+            name="country" 
+            placeholder="Choose country" 
+            aria-label="Обрати країну"
+            class="header__inp"
+        >
+</form>
+</div>
+</header>
+
     
     
     
