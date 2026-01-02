@@ -1,62 +1,191 @@
+
+
+
 .header {
-    padding-top: 40px;
-    padding-bottom: 133px;
-    background-image: linear-gradient(180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.80) 100%), url(../img/header-fons.jpg);
+  padding-top: 78px;
+  padding-bottom: 112px;
+  position: relative;
+    background-image: linear-gradient(180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.80) 100%), url(../img/header-fons-mobile.jpg);
     background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
-
-  &__icon {
-    width: 136px;
-    height: 100px;
-    position: absolute;
-    top: 31px;
-    left: 40px;
+   @media screen and (min-width: 768px) {
+        padding-top: 40px;
+    padding-bottom: 183px;
+    background-image: linear-gradient(180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.80) 100%), url(../img/header-fons-tablet.jpg);
   }
+  @media screen and (min-width: 1080px) {
+    padding-bottom: 192px;
+    background-image: linear-gradient(180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.80) 100%), url(../img/header-fons.jpg);
+  }
+
+
+
+  &__logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 0 0 213px 0;
+background: linear-gradient(136deg, rgba(196, 196, 196, 0.03) 10.75%, rgba(196, 196, 196, 0.00) 92.33%);
+backdrop-filter: blur(15px);
+padding: 24px 21px 36px 23px;
+
+  cursor: pointer;
+  @media screen and (min-width: 768px) {
+  border-radius: 0 0 359px 0;
+    padding: 40px 28px 65px 40px;
+  }
+
+  @media screen and (min-width: 1080px) {
+  padding: 40px 63px 98px 40px;
+  }
+
+  &:hover .header__icon {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+}
+
+
+   &__icon {
+    display: block;
+  width: 60px;     
+  height: 30px;
+  fill: #ffffff;      
+  transition: transform .25s ease, opacity .25s ease;
+
+    @media screen and (min-width: 768px) {
+      width: 100px;
+      height: 46px;
+  }
+
+  @media screen and (min-width: 1080px) {
+      width: 136px;     
+  height: 63px;
+  }
+}
 
   &__title {
+    display: block;
     color: #DC56C5;
-text-align: center;
+    text-align: center;
+margin: 0 auto;
 font-family: "Montserrat";
-font-size: 50px;
+font-size: 18px;
 font-weight: 900;
 line-height: normal;
-width: 588.0px;
-height: 122.0px;
-display: block;
-margin: 0 auto;
-margin-bottom: 52px;
+width: 212.0px;
+margin-bottom: 25px;
+
+  @media screen and (min-width: 768px) {
+font-size: 30px;
+width: 353.0px;
+margin-bottom: 27px;
   }
 
-  &__inp {
-    width: 270.0px;
-height: 40.0px;
-color: #939393;
-font-family: "Montserrat";
-font-size: 16px;
-font-weight: 400;
-line-height: normal;
-border-radius: 20px;
-background: rgba(255, 255, 255, 0.20);
-backdrop-filter: blur(10px);
-border: none;
-padding: 10px 118px 10px 30px;
+  @media screen and (min-width: 1080px) {
+font-size: 50px;
+width: 589.0px;
+margin-bottom: 52px;
+  }
 
   }
 
   &__form {
     display: flex;
-    gap: 30px;
+    gap: 25px;
     justify-content: center;
-
-    &:hover{
-        border: none;
-          &__inp :hover {
-   outline: 2px solid red;
-}
-    }
+    align-items: center;
+    flex-direction: column;
+      @media screen and (min-width: 768px) {
+        gap: 30px;
+        flex-direction: row;
+  }
   }
 
+  &__inp {
+color: #939393;
+font-family: "Montserrat";
+ width: 270.0px;
+height: 40.0px;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+border-radius: 20px;
+background: rgba(255, 255, 255, 0.20);
+backdrop-filter: blur(10px);
+padding-left: 30px;
+border: none;
+outline: none;
+  }
+
+  &__input{
+    color: #939393;
+font-family: "Montserrat";
+ width: 270.0px;
+height: 40.0px;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+border-radius: 20px;
+background: rgba(255, 255, 255, 0.20);
+backdrop-filter: blur(10px);
+padding-left: 30px;
+border: none;
+outline: none;
+appearance: none;
+  }
+
+  &__fixbtn {
+    width: 15px;
+    height: 10px;
+    position: absolute;
+    top: 15px;
+    right: 30px;
+  }
+
+  &__bax {
+    position: relative;
+  }
+
+&__iconp{
+  fill: white;
+}
+
+  &__input option {
+    background-color: #939393;
+    color: #ffffff;
+    font-family: "Montserrat"; 
+}
+
+
+
+  &__box {
+position: relative;
+  }
+
+  &__btn {
+    background-color: transparent;
+    position: absolute;
+    top: 14px;
+    right: 30px;
+  }
+
+
+  &__iconc{
+        fill: #939393;
+    width: 15px;
+    height: 10px;
+  }
+
+  &__icons{
+    fill: #939393;
+    width: 12px;
+    height: 12px;
+  }
 }
 

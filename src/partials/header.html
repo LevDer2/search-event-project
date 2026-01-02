@@ -9,24 +9,23 @@
 AROUND THE WORLD
 </h1>
 <form class="header__form">
-    <input 
-            type="search" 
-            id="searchQuery" 
-            name="q" 
-            placeholder="Start searching" 
-            aria-label="Почати пошук подій"
-            class="header__inp"
-            required
-        >
-        
-        <input 
-            type="text" 
-            id="country" 
-            name="country" 
-            placeholder="Choose country" 
-            aria-label="Обрати країну"
-            class="header__inp"
-        >
+    <div class="header__box">
+<input type="text" class="header__inp header__input" placeholder="Start searching">
+<button type="submit" class="header__btn">
+<svg class="header__icons"><use href="../img/symbol-defs.svg#icon-search-icon"></use></svg>
+</button>
+</div>
+<div class="header__bax">
+    <select name="pets" class="header__input">
+        <option  value="">Choose country</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+    </select>
+    <div class="header__fixbtn">
+    <svg class="header__iconc"><use href="../img/symbol-defs.svg#icon-polygon"></use></svg>
+        <svg class="icon icon-polygon"><use xlink:href="#icon-polygon"></use></svg>
+    </div>
+</div>
 </form>
 </div>
 </header>
