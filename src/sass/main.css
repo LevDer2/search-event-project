@@ -260,7 +260,9 @@ button {
 }
 
 .modal {
+  position: relative;
   width: 272px;
+  height: 915px;
   border-radius: 150px 0;
   background: #FFF2FD;
   position: absolute;
@@ -272,6 +274,7 @@ button {
 @media screen and (min-width: 768px) {
   .modal {
     width: 595px;
+    height: 831px;
     border-radius: 300px 0;
     padding: 28px 17px 56px 50px;
   }
@@ -279,6 +282,7 @@ button {
 @media screen and (min-width: 1080px) {
   .modal {
     width: 942px;
+    height: 1023px;
     padding: 62px 30px 62px 30px;
   }
 }
@@ -295,7 +299,7 @@ button {
   }
 }
 .modal__icon-btn {
-  fill: #4C00FE;
+  fill: red;
   width: 17px;
   height: 17px;
 }
@@ -394,24 +398,6 @@ button {
     margin-bottom: 20px;
   }
 }
-.modal__desk {
-  color: #0E0E0E;
-  text-align: center;
-  font-family: "Montserrat";
-  font-size: 16px;
-  font-weight: 400;
-  line-height: normal;
-}
-@media screen and (min-width: 768px) {
-  .modal__desk {
-    text-align: start;
-  }
-}
-@media screen and (min-width: 1080px) {
-  .modal__desk {
-    font-size: 18px;
-  }
-}
 .modal__icon {
   width: 24px;
   height: 16px;
@@ -427,12 +413,6 @@ button {
   display: flex;
   align-items: center;
   gap: 13px;
-  margin-bottom: 10px;
-}
-@media screen and (min-width: 1080px) {
-  .modal__bex {
-    margin-bottom: 20px;
-  }
 }
 .modal__button {
   color: #FFF;
@@ -493,7 +473,7 @@ button {
   }
 }
 @media screen and (min-width: 1080px) {
-  .modal__sub {
+  .modal {
     margin-top: 45px;
   }
 }/*# sourceMappingURL=main.css.map */
