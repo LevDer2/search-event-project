@@ -299,7 +299,7 @@ button {
   }
 }
 .modal__icon-btn {
-  fill: red;
+  fill: #4C00FE;
   width: 17px;
   height: 17px;
 }
@@ -413,6 +413,12 @@ button {
   display: flex;
   align-items: center;
   gap: 13px;
+  margin-bottom: 10px;
+}
+@media screen and (min-width: 1080px) {
+  .modal__bex {
+    margin-bottom: 20px;
+  }
 }
 .modal__button {
   color: #FFF;
@@ -473,7 +479,7 @@ button {
   }
 }
 @media screen and (min-width: 1080px) {
-  .modal {
+  .modal__sub {
     margin-top: 45px;
   }
 }/*# sourceMappingURL=main.css.map */
