@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanilla App Template</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script type="module" crossorigin src="/search-event-project/commonHelpers.js"></script>
-    <link rel="stylesheet" href="/search-event-project/assets/index-9b9ec563.css">
+    <link rel="stylesheet" href="/search-event-project/assets/index-aaa640e6.css">
   </head>
   <body>
 
@@ -22,31 +25,78 @@
 AROUND THE WORLD
 </h1>
 <form class="header__form">
-    <input 
-            type="search" 
-            id="searchQuery" 
-            name="q" 
-            placeholder="Start searching" 
-            aria-label="Почати пошук подій"
-            class="header__inp"
-            required
-        >
-        
-        <input 
-            type="text" 
-            id="country" 
-            name="country" 
-            placeholder="Choose country" 
-            aria-label="Обрати країну"
-            class="header__inp"
-        >
+    <div class="header__box">
+<input type="text" class="header__inp header__input" placeholder="Start searching">
+<button type="submit" class="header__btn">
+<svg class="header__icons"><use href="../img/symbol-defs.svg#icon-search-icon"></use></svg>
+</button>
+</div>
+<div class="header__bax">
+    <select name="pets" class="header__input">
+        <option  value="">Choose country</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+    </select>
+    <div class="header__fixbtn">
+    <svg class="header__iconc"><use href="../img/symbol-defs.svg#icon-polygon"></use></svg>
+        <svg class="icon icon-polygon"><use xlink:href="#icon-polygon"></use></svg>
+    </div>
+</div>
 </form>
 </div>
 </header>
 
     
     
-    
+     <div class="backdrop">
+      <div class="modal">
+        <button type="button" class="modal__btn">
+            <svg class="modal__icon-btn">
+            <use href="../img/symbol-defs.svg#icon-close"></use>
+        </svg>
+        </button>
+        <img src="../img/modal-logo.jpg" alt="logo" class="modal__img">
+        <div class="modal__box">
+            <img src="../img/modal-decstop.jpg" alt="fonts" class="modal__images">
+            <ul class="modal-list">
+                <li class="modal__item">
+                    <h2 class="modal__title">INFO</h2>
+                    <p class="modal__text">Atlas Weekend is the largest music festival
+in Ukraine.More than 200 artists will create
+a proper music festival atmosphere on 10 stages</p>
+                </li>
+                <li class="modal__item">
+                    <h2 class="modal__title">WHEN</h2>
+                    <p class="modal__text">2021-06-09</p>
+                     <p class="modal__text">20:00 (Kyiv/Ukraine)</p>
+                </li>
+                <li class="modal__item">
+                    <h2 class="modal__title">WHERE</h2>
+                    <p class="modal__text">Kyiv, Ukraine </p>
+                    <p class="modal__text">VDNH</p>
+                </li>
+                <li class="modal__item">
+                    <h2 class="modal__title">WHO</h2>
+                    <p class="modal__text">The Black Eyed Peas</p>
+                </li>
+                <li class="modal__item">
+                    <h2 class="modal__title">PRICES </h2>
+                    <div class="modal__bex">
+                        <svg class="modal__icon"><use href= "../img/symbol-defs.svg#icon-ticket"></use></svg>
+                        <p class="modal__text">Standart 300-500 UAH</p>
+                    </div>     
+                    <button type="submit" class="modal__button">BUY TICKETS</button>
+                     <div class="modal__bex">
+                        <svg class="modal__icon"><use href= "../img/symbol-defs.svg#icon-ticket"></use></svg>
+                        <p class="modal__text">VIP 1000-1500 UAH</p>
+                    </div>             
+                    <button type="submit" class="modal__button">BUY TICKETS</button>
+                </li>
+            </ul>
+        </div>
+            <button class="modal__sub" type="submit">MORE FROM THIS AUTHOR</button>
+      </div>
+    </div>
     
   </body>
 </html>
