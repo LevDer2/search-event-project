@@ -1,0 +1,81 @@
+body {
+  background-image: url(../../img/bg-body.png);
+  background-repeat: repeat;
+}
+
+.hero {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 260px);
+  justify-content: center;
+  gap: 24px;
+}
+
+.hero-card {
+  width: 260px;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+}
+
+
+.hero-images {
+  position: relative;
+  width: 180px;
+  height: 240px;
+}
+
+.hero-event-image {
+  width: 180px;
+  height: 227px;
+  object-fit: cover;
+  border-radius: 50px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-image-rectangle {
+  position: absolute;
+  left: 35px;
+  top: -10px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-event-name {
+  width: 194px;
+  color: #dc56c5;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.hero-event-date {
+  width: 194px;
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.hero-place {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-place-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.hero-event-place {
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
