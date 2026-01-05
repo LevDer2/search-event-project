@@ -5,3 +5,8 @@ const closeEl = document.querySelector('.modal__btn');
         back.style.opacity = '0';
        back.style.pointerEvents = 'none';
     });
+
+back.addEventListener("click", () => {
+          back.style.opacity = '0';
+          back.style.pointerEvents = 'none'; 
+    })
