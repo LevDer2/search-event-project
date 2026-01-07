@@ -1,14 +1,14 @@
 *,
 ::after,
 ::before {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 img {
-    display: block;
-     width: 100%;
-    height: auto;
-    max-width: 100%;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
 }
 
 h1,
@@ -16,21 +16,25 @@ h2,
 h3,
 h4,
 p {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 button {
-    cursor: pointer;
-    border: none;
+  cursor: pointer;
+  border: none;
+}
+
+body {
+  font-family: 'Montserrat';
 }
