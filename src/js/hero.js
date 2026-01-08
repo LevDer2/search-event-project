@@ -5,7 +5,7 @@ const sectionHero = document.querySelector('.hero');
 
 // ! Open Modal
 sectionHero.addEventListener('click', event => {
-  const card = event.target.closest('.card');
+  const card = event.target.closest('.hero__item');
   if (!card) return;
   else {
     back.style.opacity = '1';
