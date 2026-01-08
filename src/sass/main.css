@@ -267,6 +267,7 @@ body {
 @media screen and (min-width: 768px) {
   .hero__list {
     gap: 12px;
+    width: 100%;
   }
 }
 @media screen and (min-width: 1080px) {
@@ -284,6 +285,11 @@ body {
     width: 195px;
     padding: 13px 14px 0 0;
   }
+}
+.hero__item:hover {
+  transform: scale(0.98);
+  border-radius: 20px;
+  box-shadow: 0px 0px 30px 1px rgba(33, 249, 155, 0.547);
 }
 .hero__icon {
   position: absolute;
