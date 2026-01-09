@@ -22,6 +22,7 @@ function createEventCard(event) {
 
   return `
     <li class="hero__item">
+    <div class="hero__card">
       <img class="hero__icon" src="./img/img-event.svg" alt="">
       <img src="${image}" alt="${title}" class="hero__images" />
       <h3 class="hero__title">${title}</h3>
@@ -32,6 +33,7 @@ function createEventCard(event) {
         <h4 class="hero__desk">${place}</h4>
       </div>
       <p class="hero__text">${date}</p>
+      </div>
     </li>
   `;
 }
