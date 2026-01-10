@@ -6,9 +6,9 @@ const closeEl = document.querySelector('.modal__btn');
        back.style.pointerEvents = 'none';
     });
 
-backdrop.addEventListener('click', () => {
-  backdrop.style.opacity = '0';
-  backdrop.style.pointerEvents = 'none';
+back.addEventListener('click', () => {
+  back.style.opacity = '0';
+  back.style.pointerEvents = 'none';
 });
 
 

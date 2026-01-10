@@ -32,6 +32,7 @@ background: linear-gradient(136deg, rgba(196, 196, 196, 0.03) 10.75%, rgba(196, 
 backdrop-filter: blur(15px);
 padding: 24px 21px 36px 23px;
 
+
   cursor: pointer;
   @media screen and (min-width: 768px) {
   border-radius: 0 0 359px 0;
@@ -40,6 +41,12 @@ padding: 24px 21px 36px 23px;
 
   @media screen and (min-width: 1080px) {
   padding: 40px 63px 98px 40px;
+  }
+
+  &:hover {
+     box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 12px rgba(255, 255, 255, 0.6);
   }
 
   &:hover .header__icon {
@@ -67,31 +74,35 @@ padding: 24px 21px 36px 23px;
   }
 }
 
-  &__title {
-    display: block;
-    color: #DC56C5;
-    text-align: center;
-margin: 0 auto;
-font-family: "Montserrat";
-font-size: 18px;
-font-weight: 900;
-line-height: normal;
-width: 212.0px;
-margin-bottom: 25px;
+&__title {
+  display: block;
+  color: #DC56C5;
+  text-align: center;
+  margin: 0 auto;
+  font-family: "Montserrat";
+  font-size: 18px;
+  font-weight: 900;
+  line-height: normal;
+  width: 212px;
+  margin-bottom: 25px;
+
+  /* Біла підсвітка над буквами */
+  text-shadow:
+    0 -2px 6px rgba(255, 255, 255, 0.9),
+    0 -4px 12px rgba(255, 255, 255, 0.6);
 
   @media screen and (min-width: 768px) {
-font-size: 30px;
-width: 353.0px;
-margin-bottom: 27px;
+    font-size: 30px;
+    width: 353px;
+    margin-bottom: 27px;
   }
 
   @media screen and (min-width: 1080px) {
-font-size: 50px;
-width: 589.0px;
-margin-bottom: 52px;
+    font-size: 50px;
+    width: 589px;
+    margin-bottom: 52px;
   }
-
-  }
+}
 
   &__form {
     display: flex;
@@ -120,7 +131,13 @@ backdrop-filter: blur(10px);
 padding-left: 30px;
 border: none;
 outline: none;
-  }
+&:hover, &:focus{
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+}
 
   &__input{
     color: #939393;
@@ -138,7 +155,12 @@ padding-left: 30px;
 border: none;
 outline: none;
 appearance: none;
-  }
+  &:hover, &:focus{
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 12px rgba(255, 255, 255, 0.6);
+}
+}
 
   &__fixbtn {
     width: 15px;
