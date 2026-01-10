@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *,
 ::after,
 ::before {
@@ -111,6 +112,9 @@ body {
     padding: 40px 63px 98px 40px;
   }
 }
+.header__logo:hover {
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.9), 0 0 12px rgba(255, 255, 255, 0.6);
+}
 .header__logo:hover .header__icon {
   transform: scale(1.05);
   opacity: 0.9;
@@ -145,6 +149,8 @@ body {
   line-height: normal;
   width: 212px;
   margin-bottom: 25px;
+  /* Біла підсвітка над буквами */
+  text-shadow: 0 -2px 6px rgba(255, 255, 255, 0.9), 0 -4px 12px rgba(255, 255, 255, 0.6);
 }
 @media screen and (min-width: 768px) {
   .header__title {
@@ -190,6 +196,9 @@ body {
   border: none;
   outline: none;
 }
+.header__inp:hover, .header__inp:focus {
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.9), 0 0 12px rgba(255, 255, 255, 0.6);
+}
 .header__input {
   color: #939393;
   font-family: "Montserrat";
@@ -209,6 +218,9 @@ body {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+}
+.header__input:hover, .header__input:focus {
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.9), 0 0 12px rgba(255, 255, 255, 0.6);
 }
 .header__fixbtn {
   width: 15px;
