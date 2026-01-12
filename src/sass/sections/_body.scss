@@ -131,13 +131,14 @@ body {
     @media screen and (min-width: 768px) {
       font-size: 14px;
     }
+    
+    &__title,
+    &__desk {
+      overflow: hidden;
+      display: line-clamp;
+      box-orient: vertical;
+      line-clamp: 2;
+    }
   }
 }
 
-&__title,
-&__desk {
-  overflow: hidden;
-  display: line-clamp;
-  box-orient: vertical;
-  line-clamp: 2;
-}
