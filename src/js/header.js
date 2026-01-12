@@ -40,7 +40,7 @@ function createEventCard(event) {
   return `
     <li class="hero__item">
       <div class="hero__card">
-        <img class="hero__icon" src="/img/img-event.svg" alt="fons">
+        <img class="hero__icon" src="./search-event-project/img/img-event.svg" alt="fons">
         <img src="${image}" alt="${title}" class="hero__images" />
         <h3 class="hero__title">${title}</h3>
         <div class="hero__box">
