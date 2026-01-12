@@ -7,6 +7,10 @@ const countrySelect = document.querySelector('.header__input');
 
 let lastEvents = [];
 
+function truncateText(text, maxLength = 60) {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength).trim() + '...';
+}
 
 function createEventCard(event) {
   let image = './img/modal-decstop.jpg';
@@ -24,19 +28,14 @@ function createEventCard(event) {
   }
 
   const title = event.name;
-  const date =
-    event.dates && event.dates.start && event.dates.start.localDate
-      ? event.dates.start.localDate
-      : 'Unknown date';
+  const date = event.dates?.start?.localDate || 'Unknown date';
 
   let place = 'Unknown place';
-  if (event._embedded) {
-    if (event._embedded.venues && event._embedded.venues.length > 0) {
-      if (event._embedded.venues[0].name) {
-        place = event._embedded.venues[0].name;
-      }
-    }
+  if (event._embedded?.venues?.length > 0) {
+    place = event._embedded.venues[0].name || place;
   }
+
+  place = truncateText(place, 15);
 
   return `
     <li class="hero__item">
@@ -58,6 +57,7 @@ function createEventCard(event) {
 
 function renderEvents(events) {
   list.innerHTML = events.map(createEventCard).join('');
+  window.lastEvents = events;
 }
 
 function buildQuery() {
@@ -65,38 +65,29 @@ function buildQuery() {
   const country = countrySelect.value;
 
   let query = '&size=30';
-  if (keyword && keyword.length > 0) {
-    query += '&keyword=' + encodeURIComponent(keyword);
-  }
-  if (country && country.length > 0) {
-    query += '&countryCode=' + country;
-  }
+  if (keyword.length > 0) query += '&keyword=' + encodeURIComponent(keyword);
+  if (country.length > 0) query += '&countryCode=' + country;
+
   return query;
 }
 
-
 function loadEvents() {
   getApi(buildQuery())
-    .then(function (data) {
-      if (
-        data._embedded &&
-        data._embedded.events &&
-        data._embedded.events.length > 0
-      ) {
+    .then(data => {
+      if (data._embedded?.events?.length > 0) {
         lastEvents = data._embedded.events;
         renderEvents(lastEvents);
       } else {
         list.innerHTML = '<li>Nothing found</li>';
       }
     })
-    .catch(function (err) {
+    .catch(err => {
       console.error(err);
       list.innerHTML = '<li>Nothing found</li>';
     });
 }
 
-
-searchBtn.addEventListener('click', function (e) {
+searchBtn.addEventListener('click', e => {
   e.preventDefault();
   loadEvents();
 });
@@ -104,66 +95,38 @@ searchBtn.addEventListener('click', function (e) {
 searchInput.addEventListener('input', loadEvents);
 countrySelect.addEventListener('change', loadEvents);
 
-loadEvents();
-
-
-// !Countries
-
-// 1) Завантажуємо країни з RestCountries
 async function loadCountriesForSelect() {
-  const res = await fetch("https://restcountries.com/v3.1/all?fields=name,cca2");
+  const res = await fetch(
+    'https://restcountries.com/v3.1/all?fields=name,cca2'
+  );
   const data = await res.json();
 
   return data
-    .filter((c) => c.cca2 && c.name?.common)
-    .map((c) => ({ code: c.cca2, name: c.name.common }))
-    .sort((a, b) => a.name.localeCompare(b.name, "uk"));
+    .filter(c => c.cca2 && c.name?.common)
+    .map(c => ({ code: c.cca2, name: c.name.common }))
+    .sort((a, b) => a.name.localeCompare(b.name, 'uk'));
 }
 
-// 2) Заповнюємо select + додаємо першим "All countries"
 async function fillCountrySelect(selectEl) {
   const countries = await loadCountriesForSelect();
-
-  const allOption = `<option value="">All countries</option>`;
-
+  const allOption = `<option value="">Choose country</option>`;
   const options = countries
-    .map((c) => `<option value="${c.code}">${c.name} (${c.code})</option>`)
-    .join("");
+    .map(c => `<option value="${c.code}">${c.name} (${c.code})</option>`)
+    .join('');
 
   selectEl.innerHTML = allOption + options;
-
-  // щоб одразу було вибрано "All countries"
-  selectEl.value = "";
+  selectEl.value = '';
 }
 
-// 3) Завантажуємо події Ticketmaster
-// якщо countryCode === "" => показуємо події по всіх країнах (без параметра countryCode)
-async function fetchEvents(countryCode) {
-  let url =
-    `https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=rvylvsHWc98giycRfhDFKtIp8G9FNDPl`;
-
-  if (countryCode !== "") {
-    url += `&countryCode=${encodeURIComponent(countryCode)}`;
-  }
-
+async function fetchEvents(countryCode = '') {
+  let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=rvylvsHWc98giycRfhDFKtIp8G9FNDPl`;
+  if (countryCode) url += `&countryCode=${encodeURIComponent(countryCode)}`;
   const res = await fetch(url);
   return res.json();
 }
 
-// 4) Старт
-document.addEventListener("DOMContentLoaded", async () => {
-  // якщо в тебе countrySelect вже є — ок; якщо ні, розкоментуй наступний рядок:
-  // const countrySelect = document.querySelector("#countrySelect");
-
+document.addEventListener('DOMContentLoaded', async () => {
   await fillCountrySelect(countrySelect);
-
-  // одразу завантажимо "All countries"
-  const firstEvents = await fetchEvents("");
-  console.log(firstEvents);
-
-  countrySelect.addEventListener("change", async (e) => {
-    const code = e.target.value; // "" => all countries
-    const events = await fetchEvents(code);
-    console.log(events);
-  });
+  loadEvents();
+  countrySelect.addEventListener('change', loadEvents);
 });
