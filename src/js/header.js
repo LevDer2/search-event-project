@@ -1,4 +1,3 @@
-// 
 import getApi from './getApi.js';
 
 const list = document.querySelector('.hero__list');
@@ -8,48 +7,45 @@ const countrySelect = document.querySelector('.header__input');
 
 let lastEvents = [];
 
-// Функція обрізки тексту
 function truncateText(text, maxLength = 60) {
-  if (!text) return '';
-  return text.length <= maxLength
-    ? text
-    : text.slice(0, maxLength).trim() + '...';
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength).trim() + '...';
 }
 
-// Створення однієї події
 function createEventCard(event) {
-  // Локальна іконка (обов'язково відображається на GitHub Pages)
-  const iconImage = 'img/img-event.png';
-
-  // Динамічна картинка події з API, fallback на локальну
-  let image = 'img/modal-desktop.jpg';
+  let image = './img/modal-decstop.jpg';
   if (event.images && event.images.length > 0) {
-    const largeImage = event.images.find(img => img.width >= 640);
-    image = largeImage ? largeImage.url : event.images[0].url;
+    for (let i = 0; i < event.images.length; i++) {
+      if (event.images[i].width >= 640) {
+        image = event.images[i].url;
+        break;
+      }
+    }
+    if (image === './img/modal-decstop.jpg') {
+      image = event.images[0].url;
+    }
   }
 
-  const title = event.name || 'No title';
+  const title = event.name;
   const date = event.dates?.start?.localDate || 'Unknown date';
-
+  const img =
+    'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUzIiBoZWlnaHQ9IjE0MyIgdmlld0JveD0iMCAwIDE1MyAxNDMiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUwIDAuNUgxNTIuNVY5M0MxNTIuNSAxMjAuMzM4IDEzMC4zMzggMTQyLjUgMTAzIDE0Mi41SDAuNVY1MEMwLjUgMjIuNjYxOSAyMi42NjE5IDAuNSA1MCAwLjVaIiBzdHJva2U9IiNEQzU2QzUiIHN0cm9rZS1vcGFjaXR5PSIwLjMiLz48L3N2Zz4=';
   let place = 'Unknown place';
   if (event._embedded?.venues?.length > 0) {
     place = event._embedded.venues[0].name || place;
   }
+
   place = truncateText(place, 15);
 
   return `
     <li class="hero__item">
       <div class="hero__card">
-        <!-- Локальна іконка -->
-        <img class="hero__icon" src="${iconImage}" alt="fons">
-
-        <!-- Картинка події -->
+        <img class="hero__icon" src="${img}" alt="fons">
         <img src="${image}" alt="${title}" class="hero__images" />
-
         <h3 class="hero__title">${title}</h3>
         <div class="hero__box">
           <svg class="hero__img">
-            <use href="img/symbol-defs.svg#icon-place"></use>
+            <use href="./img/symbol-defs.svg#icon-place"></use>
           </svg>
           <h4 class="hero__desk">${place}</h4>
         </div>
@@ -59,35 +55,31 @@ function createEventCard(event) {
   `;
 }
 
-// Рендер списку подій
 function renderEvents(events) {
-  if (!events || events.length === 0) {
-    list.innerHTML = '<li>Nothing found</li>';
-    return;
-  }
   list.innerHTML = events.map(createEventCard).join('');
   window.lastEvents = events;
 }
 
-// Формування запиту для API
 function buildQuery() {
   const keyword = searchInput.value.trim();
   const country = countrySelect.value;
 
   let query = '&size=30';
-  if (keyword) query += '&keyword=' + encodeURIComponent(keyword);
-  if (country) query += '&countryCode=' + encodeURIComponent(country);
+  if (keyword.length > 0) query += '&keyword=' + encodeURIComponent(keyword);
+  if (country.length > 0) query += '&countryCode=' + country;
 
   return query;
 }
 
-// Завантаження подій
 function loadEvents() {
   getApi(buildQuery())
     .then(data => {
-      const events = data._embedded?.events || [];
-      lastEvents = events;
-      renderEvents(events);
+      if (data._embedded?.events?.length > 0) {
+        lastEvents = data._embedded.events;
+        renderEvents(lastEvents);
+      } else {
+        list.innerHTML = '<li>Nothing found</li>';
+      }
     })
     .catch(err => {
       console.error(err);
@@ -95,7 +87,6 @@ function loadEvents() {
     });
 }
 
-// Обробники подій для пошуку
 searchBtn.addEventListener('click', e => {
   e.preventDefault();
   loadEvents();
@@ -104,7 +95,6 @@ searchBtn.addEventListener('click', e => {
 searchInput.addEventListener('input', loadEvents);
 countrySelect.addEventListener('change', loadEvents);
 
-// Завантаження країн для select
 async function loadCountriesForSelect() {
   const res = await fetch(
     'https://restcountries.com/v3.1/all?fields=name,cca2'
@@ -117,7 +107,6 @@ async function loadCountriesForSelect() {
     .sort((a, b) => a.name.localeCompare(b.name, 'uk'));
 }
 
-// Заповнення select елементу
 async function fillCountrySelect(selectEl) {
   const countries = await loadCountriesForSelect();
   const allOption = `<option value="">Choose country</option>`;
@@ -129,8 +118,15 @@ async function fillCountrySelect(selectEl) {
   selectEl.value = '';
 }
 
-// Старт після завантаження DOM
+async function fetchEvents(countryCode = '') {
+  let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=rvylvsHWc98giycRfhDFKtIp8G9FNDPl`;
+  if (countryCode) url += `&countryCode=${encodeURIComponent(countryCode)}`;
+  const res = await fetch(url);
+  return res.json();
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   await fillCountrySelect(countrySelect);
   loadEvents();
+  countrySelect.addEventListener('change', loadEvents);
 });
