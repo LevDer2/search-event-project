@@ -82,7 +82,8 @@ function renderModal(ev) {
     priceMax = ev.priceRanges[0].max;
     currency = ev.priceRanges[0].currency;
   }
-
+  const icon =
+    'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyOSAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMy4yMjIyMiAwTDAgMEwwIDE5LjMzMzNIMy4yMjIyMkwzLjIyMjIyIDBaIiBmaWxsPSIjMEUwRTBFIi8+PHBhdGggZD0iTTExLjMyNjYgMEw4LjEwNDQgMEw4LjEwNDQgMTkuMzMzM0gxMS4zMjY2TDExLjMyNjYgMFoiIGZpbGw9IiMwRTBFMEUiLz48cGF0aCBkPSJNMTYuMjA4OCAwTDEyLjk4NjYgMEwxMi45ODY2IDE5LjMzMzNIMTYuMjA4OEwxNi4yMDg4IDBaIiBmaWxsPSIjMEUwRTBFIi8+PHBhdGggZD0iTTI4Ljk5OTkgMEwyNC4yMTU0IDBMMjQuMjE1NCAxOS4zMzMzSDI4Ljk5OTlMMjguOTk5OSAwWiIgZmlsbD0iIzBFMEUwRSIvPjxwYXRoIGQ9Ik02LjQ0NDQ4IDBMNC44ODIxOSAwTDQuODgyMTkgMTkuMzMzM0g2LjQ0NDQ4TDYuNDQ0NDggMFoiIGZpbGw9IiMwRTBFMEUiLz48cGF0aCBkPSJNMTkuMzMzMyAwTDE3Ljc3MSAwTDE3Ljc3MSAxOS4zMzMzSDE5LjMzMzNMMTkuMzMzMyAwWiIgZmlsbD0iIzBFMEUwRSIvPjxwYXRoIGQ9Ik0yMi41NTU1IDBMMjAuOTkzMiAwTDIwLjk5MzIgMTkuMzMzM0gyMi41NTU1TDIyLjU1NTUgMFoiIGZpbGw9IiMwRTBFMEUiLz48L3N2Zz4=';
   let poster = './img/modal-decstop.jpg';
   let logo = './img/modal-logo.jpg';
   if (ev.images && ev.images.length > 0) {
@@ -122,8 +123,13 @@ function renderModal(ev) {
         <li class="modal__item">
           <h2 class="modal__title">PRICES</h2>
           <div class="modal__bex">
-           <img class="modal__icon" src="../img/ticket.png" alt="icon">
-            <p class="modal__desk">Standart ${priceMin}-${priceMax} ${currency}</p>
+           <img class="modal__icon" src="${icon}" alt="icon">
+            <p class="modal__desk">Standart 300-500 UAH</p>
+          </div>
+          <button class="modal__button" data-url="${ev.url}">BUY TICKETS</button>
+             <div class="modal__bex">
+           <img class="modal__icon" src="${icon}" alt="icon">
+            <p class="modal__desk">VIP 1000-1500 UAH</p>
           </div>
           <button class="modal__button" data-url="${ev.url}">BUY TICKETS</button>
         </li>

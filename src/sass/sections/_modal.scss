@@ -173,9 +173,11 @@ height: 19.3px;
   &__bex{
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 13px;
     margin-bottom: 10px;
       @media screen and (min-width: 1080px) {
+        justify-content: start;
         margin-bottom: 20px;
   }
   }
@@ -225,7 +227,7 @@ height: 40.0px;
 border-radius: 5px;
 border: 1px solid #4C00FE;
 background-color: transparent;
-margin-top: 25px;
+margin-top: 85px;
 display: block;
 margin-right: auto;
 margin-left: auto;

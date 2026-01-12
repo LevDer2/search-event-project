@@ -312,10 +312,12 @@ body {
   margin-top: -9px;
   margin-bottom: -5px;
   padding-left: 5px;
+  padding-top: 5px;
 }
 @media screen and (min-width: 768px) {
   .hero__card {
     width: 200px;
+    padding-top: 10px;
     padding-left: 10px;
     margin-top: -13px;
   }
@@ -631,11 +633,13 @@ body {
 .modal__bex {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 13px;
   margin-bottom: 10px;
 }
 @media screen and (min-width: 1080px) {
   .modal__bex {
+    justify-content: start;
     margin-bottom: 20px;
   }
 }
@@ -685,7 +689,7 @@ body {
   border-radius: 5px;
   border: 1px solid #4C00FE;
   background-color: transparent;
-  margin-top: 25px;
+  margin-top: 85px;
   display: block;
   margin-right: auto;
   margin-left: auto;
