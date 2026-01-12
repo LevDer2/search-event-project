@@ -12,6 +12,11 @@ function truncateText(text, maxLength = 60) {
   return text.slice(0, maxLength).trim() + '...';
 }
 
+function truncateTitleToOneLine(text, maxLength = 50) {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength).trim() + '...';
+}
+
 function createEventCard(event) {
   let image = './img/modal-decstop.jpg';
   if (event.images && event.images.length > 0) {
@@ -26,7 +31,8 @@ function createEventCard(event) {
     }
   }
 
-  const title = event.name;
+  const title = truncateTitleToOneLine(event.name, 30);
+
   const date = event.dates?.start?.localDate || 'Unknown date';
   const img =
     'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUzIiBoZWlnaHQ9IjE0MyIgdmlld0JveD0iMCAwIDE1MyAxNDMiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUwIDAuNUgxNTIuNVY5M0MxNTIuNSAxMjAuMzM4IDEzMC4zMzggMTQyLjUgMTAzIDE0Mi41SDAuNVY1MEMwLjUgMjIuNjYxOSAyMi42NjE5IDAuNSA1MCAwLjVaIiBzdHJva2U9IiNEQzU2QzUiIHN0cm9rZS1vcGFjaXR5PSIwLjMiLz48L3N2Zz4=';
@@ -34,7 +40,6 @@ function createEventCard(event) {
   if (event._embedded?.venues?.length > 0) {
     place = event._embedded.venues[0].name || place;
   }
-
   place = truncateText(place, 15);
 
   return `
@@ -63,11 +68,9 @@ function renderEvents(events) {
 function buildQuery() {
   const keyword = searchInput.value.trim();
   const country = countrySelect.value;
-
   let query = '&size=30';
   if (keyword.length > 0) query += '&keyword=' + encodeURIComponent(keyword);
   if (country.length > 0) query += '&countryCode=' + country;
-
   return query;
 }
 
@@ -100,7 +103,6 @@ async function loadCountriesForSelect() {
     'https://restcountries.com/v3.1/all?fields=name,cca2'
   );
   const data = await res.json();
-
   return data
     .filter(c => c.cca2 && c.name?.common)
     .map(c => ({ code: c.cca2, name: c.name.common }))
@@ -113,7 +115,6 @@ async function fillCountrySelect(selectEl) {
   const options = countries
     .map(c => `<option value="${c.code}">${c.name} (${c.code})</option>`)
     .join('');
-
   selectEl.innerHTML = allOption + options;
   selectEl.value = '';
 }
