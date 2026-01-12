@@ -122,7 +122,7 @@ function renderModal(ev) {
         <li class="modal__item">
           <h2 class="modal__title">PRICES</h2>
           <div class="modal__bex">
-            <svg class="modal__icon"><use href="./img/symbol-defs.svg#icon-ticket"></use></svg>
+           <img class="modal__icon" src="../img/ticket.png" alt="icon">
             <p class="modal__desk">Standart ${priceMin}-${priceMax} ${currency}</p>
           </div>
           <button class="modal__button" data-url="${ev.url}">BUY TICKETS</button>
