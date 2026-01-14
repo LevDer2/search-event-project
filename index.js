@@ -67,4 +67,4 @@
       </ul>
     </div>
   `;let I=P.querySelector(".modal__button");I&&I.addEventListener("click",function(){window.open(this.dataset.url,"_blank")});let p=document.querySelector(".modal__sub");p&&(p.onclick=function(){window.open("https://www.google.com/search?q="+M,"_blank")})}
-//# sourceMappingURL=commonHelpers.js.map
+//# sourceMappingURL=index.js.map
