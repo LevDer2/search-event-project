@@ -45,24 +45,20 @@ body {
   padding-right: 15px;
   padding-left: 15px;
   margin: 0 auto;
-  outline: 1px solid red;
 }
 @media screen and (min-width: 480px) {
   .container {
     width: 480px;
-    outline: 1px solid red;
   }
 }
 @media screen and (min-width: 768px) {
   .container {
     width: 768px;
-    outline: 1px solid yellow;
   }
 }
 @media screen and (min-width: 1080px) {
   .container {
     width: 1080px;
-    outline: 1px solid green;
   }
 }
 
@@ -409,6 +405,21 @@ body {
   display: line-clamp;
   box-orient: vertical;
   line-clamp: 2;
+}
+.hero .deskbox {
+  font-size: 25px;
+  padding: 25px 20px;
+  border-radius: 40px;
+  border: 1px solid #939393;
+  color: #dc56c5;
+  text-shadow: 0 2px 6px rgba(255, 255, 255, 0.9), 0 4px 12px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.302), 0 0 12px rgba(255, 255, 255, 0.265);
+  margin-top: 150px;
+}
+@media screen and (min-width: 768px) {
+  .hero .deskbox {
+    font-size: 40px;
+  }
 }
 
 .pagination {

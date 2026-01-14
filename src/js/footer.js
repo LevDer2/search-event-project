@@ -1,5 +1,4 @@
 // ! Server
-
 import getApi from './getApi.js';
 
 // ! Elements
@@ -83,6 +82,9 @@ if (!paginationNav || !list) {
   }
 
   function renderEvents(events) {
+    // головне: modal.js бере дані звідси, тому при кожному рендері треба оновлювати
+    window.lastEvents = events;
+
     list.innerHTML = events.map(createEventCard).join('');
   }
 
@@ -153,7 +155,10 @@ if (!paginationNav || !list) {
   }
 
   function loadEvents() {
-    list.innerHTML = '<li class="hero__item">Loading...</li>';
+    list.innerHTML = '<p class="hero__desk deskbox">Loading...</p>';
+
+    // щоб модалка не підхоплювала старі дані, поки йде запит
+    window.lastEvents = [];
 
     getApi(buildQuery())
       .then(data => {
@@ -166,11 +171,13 @@ if (!paginationNav || !list) {
         if (currentPageUI > totalPages) currentPageUI = totalPages;
         renderPagination();
 
-        const events = data._embedded?.events || [];
+        const events = data?._embedded?.events || [];
+
         if (events.length > 0) {
-          renderEvents(events);
+          renderEvents(events); // тут window.lastEvents оновиться
         } else {
-          list.innerHTML = '<li class="hero__item">Nothing found</li>';
+          window.lastEvents = [];
+          list.innerHTML = '<p class="hero__desk deskbox">Nothing found</p>';
         }
       })
       .catch(err => {
@@ -178,7 +185,8 @@ if (!paginationNav || !list) {
         totalPages = 1;
         currentPageUI = 1;
         renderPagination();
-        list.innerHTML = '<li class="hero__item">Nothing found</li>';
+        window.lastEvents = [];
+        list.innerHTML = '<p class="hero__desk deskbox">Nothing found</p>';
       });
   }
 
