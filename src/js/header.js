@@ -5,53 +5,49 @@ const searchInput = document.querySelector('.header__inp');
 const searchBtn = document.querySelector('.header__btn');
 const countrySelect = document.querySelector('.header__input');
 
-let lastEvents = [];
-
 function truncateText(text, maxLength = 60) {
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength).trim() + '...';
+  if (!text) return '';
+  return text.length > maxLength
+    ? text.slice(0, maxLength).trim() + '...'
+    : text;
 }
 
 function truncateTitleToOneLine(text, maxLength = 50) {
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength).trim() + '...';
+  if (!text) return '';
+  return text.length > maxLength
+    ? text.slice(0, maxLength).trim() + '...'
+    : text;
 }
 
-function createEventCard(event) {
+function createEventCard(event, index) {
   let image = './img/modal-decstop.jpg';
-  if (event.images && event.images.length > 0) {
-    for (let i = 0; i < event.images.length; i++) {
-      if (event.images[i].width >= 640) {
-        image = event.images[i].url;
+  if (event.images?.length) {
+    for (let img of event.images) {
+      if (img.width >= 640) {
+        image = img.url;
         break;
       }
     }
-    if (image === './img/modal-decstop.jpg') {
-      image = event.images[0].url;
-    }
+    if (image === './img/modal-decstop.jpg') image = event.images[0].url;
   }
 
   const title = truncateTitleToOneLine(event.name, 30);
-
+  const place = truncateText(
+    event._embedded?.venues?.[0]?.name || 'Unknown',
+    15
+  );
   const date = event.dates?.start?.localDate || 'Unknown date';
-  const img =
+  const imgPlaceholder =
     'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUzIiBoZWlnaHQ9IjE0MyIgdmlld0JveD0iMCAwIDE1MyAxNDMiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUwIDAuNUgxNTIuNVY5M0MxNTIuNSAxMjAuMzM4IDEzMC4zMzggMTQyLjUgMTAzIDE0Mi41SDAuNVY1MEMwLjUgMjIuNjYxOSAyMi42NjE5IDAuNSA1MCAwLjVaIiBzdHJva2U9IiNEQzU2QzUiIHN0cm9rZS1vcGFjaXR5PSIwLjMiLz48L3N2Zz4=';
-  let place = 'Unknown place';
-  if (event._embedded?.venues?.length > 0) {
-    place = event._embedded.venues[0].name || place;
-  }
-  place = truncateText(place, 15);
 
   return `
-    <li class="hero__item">
+    <li class="hero__item" data-index="${index}">
       <div class="hero__card">
-        <img class="hero__icon" src="${img}" alt="fons">
-        <img src="${image}" alt="${title}" class="hero__images" />
+        <img class="hero__icon" src="${imgPlaceholder}" alt="fons">
+        <img class="hero__images" src="${image}" alt="${title}" />
         <h3 class="hero__title">${title}</h3>
         <div class="hero__box">
-          <svg class="hero__img">
-            <use href="./img/symbol-defs.svg#icon-place"></use>
-          </svg>
+          <svg class="hero__img"><use href="./img/symbol-defs.svg#icon-place"></use></svg>
           <h4 class="hero__desk">${place}</h4>
         </div>
         <p class="hero__text">${date}</p>
@@ -61,28 +57,25 @@ function createEventCard(event) {
 }
 
 function renderEvents(events) {
-  list.innerHTML = events.map(createEventCard).join('');
   window.lastEvents = events;
+  list.innerHTML = events.map((ev, i) => createEventCard(ev, i)).join('');
 }
 
 function buildQuery() {
   const keyword = searchInput.value.trim();
   const country = countrySelect.value;
   let query = '&size=30';
-  if (keyword.length > 0) query += '&keyword=' + encodeURIComponent(keyword);
-  if (country.length > 0) query += '&countryCode=' + country;
+  if (keyword) query += '&keyword=' + encodeURIComponent(keyword);
+  if (country) query += '&countryCode=' + country;
   return query;
 }
 
 function loadEvents() {
   getApi(buildQuery())
     .then(data => {
-      if (data._embedded?.events?.length > 0) {
-        lastEvents = data._embedded.events;
-        renderEvents(lastEvents);
-      } else {
-        list.innerHTML = '<li>Nothing found</li>';
-      }
+      const events = data._embedded?.events || [];
+      if (events.length > 0) renderEvents(events);
+      else list.innerHTML = '<li>Nothing found</li>';
     })
     .catch(err => {
       console.error(err);
@@ -94,7 +87,6 @@ searchBtn.addEventListener('click', e => {
   e.preventDefault();
   loadEvents();
 });
-
 searchInput.addEventListener('input', loadEvents);
 countrySelect.addEventListener('change', loadEvents);
 
@@ -119,15 +111,8 @@ async function fillCountrySelect(selectEl) {
   selectEl.value = '';
 }
 
-async function fetchEvents(countryCode = '') {
-  let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=rvylvsHWc98giycRfhDFKtIp8G9FNDPl`;
-  if (countryCode) url += `&countryCode=${encodeURIComponent(countryCode)}`;
-  const res = await fetch(url);
-  return res.json();
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
   await fillCountrySelect(countrySelect);
   loadEvents();
-  countrySelect.addEventListener('change', loadEvents);
 });
+
