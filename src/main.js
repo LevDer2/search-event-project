@@ -1,5 +1,5 @@
 import '../src/js/header';
-import './js/hero';
-import './js/footer';
-import './js/modal';
-import './js/getApi';
+import '../src/js/hero';
+import '../src/js/footer';
+import '../src/js/modal';
+import '../src/js/getApi';
